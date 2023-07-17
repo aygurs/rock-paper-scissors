@@ -6,14 +6,17 @@ function playerChoice() {
 
     if (question.toLowerCase() == 'rock') {
         playerAnswer = 'Rock';
+        console.log('Player chose Rock');
     }
 
     else if (question.toLowerCase() == 'paper') {
         playerAnswer = 'Paper';
+        console.log('Player chose Paper');
     }
 
     else if (question.toLowerCase() == 'scissors') {
         playerAnswer = 'Scissors';
+        console.log('Player chose Scissors');
     }
 
     else {
