@@ -1,38 +1,64 @@
+let playerAnswer = ' '
+let computerAnswer = ' '
+
+function playerChoice() {
+    let question = prompt('Rock, paper or scissors?')
+
+    if (question.toLowerCase() == 'rock') {
+        playerAnswer = 'Rock';
+    }
+
+    else if (question.toLowerCase() == 'paper') {
+        playerAnswer = 'Paper';
+    }
+
+    else if (question.toLowerCase() == 'scissors') {
+        playerAnswer = 'Scissors';
+    }
+
+    else {
+        console.log('Please enter an answer!');
+    }
+}
+
 function computerChoice() {
     const random = Math.floor(Math.random() * ((3 - 1) + 1)) + 1;
     
     if (random === 1) {
-        console.log('Computer chose rock')
+        computerAnswer = 'Rock'
+        console.log('Computer chose Rock');
     }
 
     if (random === 2) {
-        console.log('Computer chose paper')
+        computerAnswer = 'Paper'
+        console.log('Computer chose Paper');
     }
 
     if (random === 3) {
-        console.log('Computer chose scissors')
+        computerAnswer = 'Scissors'
+        console.log('Computer chose Scissors');
     }
 }
 
-function playerChoice() {
-    let playerAnswer = prompt('Rock, paper or scissors?')
+function playRound() {
 
-    if (playerAnswer.toLowerCase() == 'rock') {
-        console.log('Rock')
+    if (computerAnswer === 'Rock' && playerAnswer === 'Rock' || computerAnswer === 'Paper' && playerAnswer === 'Paper' || computerAnswer === 'Scissors' && playerAnswer === 'Scissors') {
+        console.log('Computer and Player tied!');
     }
 
-    else if (playerAnswer.toLowerCase() == 'paper') {
-        console.log('Paper')
+    else if (computerAnswer === 'Rock' && playerAnswer === 'Scissors' || computerAnswer === 'Paper' && playerAnswer === 'Rock' || computerAnswer === 'Scissors' && playerAnswer === 'Paper') {
+        console.log('Computer wins!');
     }
 
-    else if (playerAnswer.toLowerCase() == 'scissors') {
-        console.log('Scissors')
+    else if (computerAnswer === 'Rock' && playerAnswer === 'Paper' || computerAnswer === 'Paper' && playerAnswer === 'Scissors' || computerAnswer === 'Scissors' && playerAnswer === 'Rock') {
+        console.log('Player wins!');
     }
 
     else {
-        console.log('Please enter an answer!')
+        console.log('Something went wrong.');
     }
 }
 
 playerChoice()
 computerChoice()
+playRound()
