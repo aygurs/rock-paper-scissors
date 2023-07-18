@@ -1,3 +1,5 @@
+/*
+
 // Variables for answers and scores
 let playerAnswer = ' '
 let computerAnswer = ' '
@@ -106,6 +108,117 @@ function game() {
     computerChoice()
     playRound()
     endGame()
+}
+
+game()
+
+*/
+
+// I decided to write an alternative code for the game
+// My old code can still be viewed above
+
+let playerScore = 0
+let computerScore = 0
+let roundNumber = 1
+
+function getComputerChoice() {
+    const random = Math.floor(Math.random() * ((3 - 1) + 1)) + 1;
+    
+    if (random === 1) {
+        return 'rock'
+    }
+
+    if (random === 2) {
+        return 'paper'
+    }
+
+    if (random === 3) {
+        return 'scissors'
+    }
+}
+
+function playRound() {
+
+    let question = prompt('Rock, paper or scissors?')
+    const playerSelection = question.toLowerCase()
+    const computerSelection = getComputerChoice();
+    
+    console.log('ROUND ' + roundNumber + '\nPlayer chose: ' + playerSelection + ' and Computer chose: ' + computerSelection)
+
+    if (playerSelection === computerSelection) {
+        roundNumber +=1
+        return 'Its a tie!\nPlayer score is ' + playerScore + ' and Computer score is ' + computerScore
+    }
+
+    else if (playerSelection === 'rock') {
+        if (computerSelection === 'paper') {
+            computerScore += 1
+            roundNumber +=1
+            return 'You lose. Paper beats rock.\nPlayer score is ' + playerScore + ' and Computer score is ' + computerScore
+        }
+        else if (computerSelection === 'scissors') {
+            playerScore += 1
+            roundNumber +=1
+            return 'You win! Rock beats scissors.\nPlayer score is ' + playerScore + ' and Computer score is ' + computerScore
+        }
+    }
+
+    else if (playerSelection === 'paper') {
+        if (computerSelection === 'rock') {
+            playerScore += 1
+            roundNumber +=1
+            return 'You win! Paper beats rock.\nPlayer score is ' + playerScore + ' and Computer score is ' + computerScore
+        }
+        else if (computerSelection === 'scissors') {
+            computerScore += 1
+            roundNumber +=1
+            return 'You lose. Scissors beats paper.\nPlayer score is ' + playerScore + ' and Computer score is ' + computerScore
+        }
+    }
+
+    else if (playerSelection === 'scissors') {
+        if (computerSelection === 'rock') {
+            computerScore += 1
+            roundNumber +=1
+            return 'You lose. Rock beats scissors.\nPlayer score is ' + playerScore + ' and Computer score is ' + computerScore
+        }
+        else if (computerSelection === 'paper') {
+            playerScore += 1
+            roundNumber +=1
+            return 'You win! Scissors beats paper.\nPlayer score is ' + playerScore + ' and Computer score is ' + computerScore
+        }
+    }
+
+    else {
+        roundNumber +=1
+        return 'You need to enter either: rock, paper or scissors!'
+    }
+}
+
+function endGame() {
+    
+    if ((playerScore && computerScore > 0) && (playerScore === computerScore)) {
+        return 'Final score: Computer: ' + computerScore + ' Player: ' + playerScore + '\nScore tied! Thanks for playing.'
+    }
+
+    else if (playerScore === computerScore) {
+        return 'No score to show.'
+    }
+
+    else if (playerScore > computerScore) {
+        return 'Final score: Computer: ' + computerScore + ' Player: ' + playerScore + '\nPlayer wins the game! Thanks for playing.'
+    }
+
+    else if (computerScore > playerScore) {
+        return 'Final score: Computer: ' + computerScore + ' Player: ' + playerScore + '\nComputer wins the game! Thanks for playing.'
+    }
+}
+
+function game() {
+    console.log(playRound())
+    console.log(playRound())
+    console.log(playRound())
+    console.log(endGame())
 }
 
 game()
