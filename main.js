@@ -1,7 +1,7 @@
 // These variables hold data that will be changed later
 let playerScore = 0
 let computerScore = 0
-let roundNumber = 1
+let roundNumber = 0
 
 function getComputerChoice() {
     const randomChoice = Math.floor(Math.random() * ((3 - 1) + 1)) + 1;
@@ -19,34 +19,53 @@ function getComputerChoice() {
     }
 }
 
-function playRound() {
+const rockButton = document.getElementById('rock')
+const paperButton = document.getElementById('paper')
+const scissorsButton = document.getElementById('scissors')
 
-    let question = prompt('Rock, paper or scissors?')
-    const playerSelection = question.toLowerCase()
-    // To make player selection case insensitive
+rockButton.addEventListener('click', function() {
+    playRound('rock');
+});
+
+paperButton.addEventListener('click', function() {
+    playRound('paper');
+});
+
+scissorsButton.addEventListener('click', function() {
+    playRound('scissors');
+});
+
+function capitalizeFirstLetter(str) {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  }
+
+
+function playRound(playerSelection) {
+
     const computerSelection = getComputerChoice();
-    
-    console.log('ROUND ' + roundNumber 
-    + '\nPlayer chose: ' + playerSelection + ' and Computer chose: ' + computerSelection)
+
+    const resultInfo = document.querySelector('.result');
+
+    const infoText = document.querySelector('.info');
+    infoText.textContent = 'Player chose: ' + capitalizeFirstLetter(playerSelection) 
+    + ' and Computer chose: ' + capitalizeFirstLetter(computerSelection);
 
     if (playerSelection === computerSelection) {
         roundNumber +=1
-        return 'Its a tie!\nPlayer score is ' + playerScore 
-        + ' and Computer score is ' + computerScore
+        resultInfo.textContent = 'ROUND: ' + roundNumber + '\n You tied!'
     }
 
     else if (playerSelection === 'rock') {
         if (computerSelection === 'paper') {
             computerScore += 1
             roundNumber +=1
-            return 'You lose. Paper beats rock.\nPlayer score is ' + playerScore 
-            + ' and Computer score is ' + computerScore
+            resultInfo.textContent = 'ROUND: ' + roundNumber + '\n You lose! Paper beats rock.'
         }
+
         else if (computerSelection === 'scissors') {
             playerScore += 1
             roundNumber +=1
-            return 'You win! Rock beats scissors.\nPlayer score is ' + playerScore 
-            + ' and Computer score is ' + computerScore
+            resultInfo.textContent = 'ROUND: ' + roundNumber + '\n You win! Rock beats scissors.'
         }
     }
 
@@ -54,14 +73,12 @@ function playRound() {
         if (computerSelection === 'rock') {
             playerScore += 1
             roundNumber +=1
-            return 'You win! Paper beats rock.\nPlayer score is ' + playerScore 
-            + ' and Computer score is ' + computerScore
+            resultInfo.textContent = 'ROUND: ' + roundNumber + '\n You win! Paper beats rock.'
         }
         else if (computerSelection === 'scissors') {
             computerScore += 1
             roundNumber +=1
-            return 'You lose. Scissors beats paper.\nPlayer score is ' + playerScore 
-            + ' and Computer score is ' + computerScore
+            resultInfo.textContent = 'ROUND: ' + roundNumber + '\n You lose! Scissors beats paper.'
         }
     }
 
@@ -69,21 +86,27 @@ function playRound() {
         if (computerSelection === 'rock') {
             computerScore += 1
             roundNumber +=1
-            return 'You lose. Rock beats scissors.\nPlayer score is ' + playerScore 
-            + ' and Computer score is ' + computerScore
+            resultInfo.textContent = 'ROUND: ' + roundNumber + '\n You lose! Rock beats scissors.'
         }
         else if (computerSelection === 'paper') {
             playerScore += 1
             roundNumber +=1
-            return 'You win! Scissors beats paper.\nPlayer score is ' + playerScore 
-            + ' and Computer score is ' + computerScore
+            resultInfo.textContent = 'ROUND: ' + roundNumber + '\n You win! Scissors beats paper.'
         }
     }
 
-    else {
-        roundNumber +=1
-        return 'You need to enter either: rock, paper or scissors!'
-        // This is for if the player does not enter a valid option
+    const score = document.querySelector('.score');
+    score.textContent = 'P: ' + playerScore + ' C: ' + computerScore;
+}
+
+function roundCheck() {
+
+    if (roundNumber < 5){
+        return
+    }
+
+    else if (roundNumber >= 5){
+        endGame()
     }
 }
 
@@ -114,12 +137,3 @@ function endGame() {
         + '\nComputer wins the game! Thanks for playing.'
     }
 }
-
-function game() {
-    console.log(playRound())
-    console.log(playRound())
-    console.log(playRound())
-    console.log(endGame())
-}
-
-game()
