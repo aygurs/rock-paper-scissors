@@ -1,24 +1,22 @@
+//Sets the default values for the first game
 let playerScore = 0
 let computerScore = 0
 let roundNumber = 1
 let gameActive = true
 
-function disableButtons() {
-    rockButton.disabled = true;
-    paperButton.disabled = true;
-    scissorsButton.disabled = true;
-}
-
 function capitalizeFirstLetter(str) {
     return str.charAt(0).toUpperCase() + str.slice(1);
   }
 
+//Only allows 5 rounds to be played per game
 function roundCheck() {
     if (roundNumber >= 5) {
         endGame();
     }
 }
 
+//Play again button clears the game information
+//It also removes event listeners so they don't stack during each new game
 const playAgainButton = document.querySelector('.again');
 playAgainButton.addEventListener('click', function() {
     if (!gameActive) {
@@ -31,10 +29,14 @@ playAgainButton.addEventListener('click', function() {
         rockButton.removeEventListener('click', handleRockClick);
         paperButton.removeEventListener('click', handlePaperClick);
         scissorsButton.removeEventListener('click', handleScissorsClick);
+        const score = document.querySelector('.score');
+        score.textContent = 'C: 0 P: 0';
         initializeGame();
     }
 });
 
+//I have declared these outside of initialiseGame() so
+//they're on a Global scope and removeEventListener in play again will work
 const rockButton = document.getElementById('rock')
 const paperButton = document.getElementById('paper')
 const scissorsButton = document.getElementById('scissors')
@@ -42,6 +44,7 @@ rockButton.addEventListener('click', handleRockClick);
 paperButton.addEventListener('click', handlePaperClick);
 scissorsButton.addEventListener('click', handleScissorsClick);
 
+//Functions for what will occur once each button is pressed
 function handleRockClick() {
         if (gameActive) {
             playRound('rock');
@@ -85,7 +88,6 @@ function playRound(playerSelection) {
             computerScore += 1
             resultInfo.textContent = 'ROUND: ' + roundNumber + '\n You lose! Paper beats rock.'
         }
-
         else if (computerSelection === 'scissors') {
             playerScore += 1
             resultInfo.textContent = 'ROUND: ' + roundNumber + '\n You win! Rock beats scissors.'
@@ -115,10 +117,11 @@ function playRound(playerSelection) {
     }
 
     const score = document.querySelector('.score');
-    score.textContent = 'P: ' + playerScore + ' C: ' + computerScore;
+    score.textContent = 'C: ' + computerScore + ' P: ' + playerScore;
 }
 
 function getComputerChoice() {
+    //Will return a random number between 1-3
     const randomChoice = Math.floor(Math.random() * ((3 - 1) + 1)) + 1;
     
     if (randomChoice === 1) {
@@ -137,11 +140,12 @@ function getComputerChoice() {
 initializeGame();
 
 function initializeGame() {
-
+    //Resets the game values again (mostly for when play again is pressed)
     playerScore = 0;
     computerScore = 0;
     roundNumber = 1;
     gameActive = true;
+    //Adds the event listeners again (for when play again is pressed)
     rockButton.addEventListener('click', handleRockClick);
     paperButton.addEventListener('click', handlePaperClick);
     scissorsButton.addEventListener('click', handleScissorsClick);
