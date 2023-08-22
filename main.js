@@ -157,6 +157,7 @@ function initializeGame() {
 function endGame() {
     gameActive = false;
     const endInfo = document.querySelector('.end');
+    endInfo.style.whiteSpace = 'pre-line';
     
     if (playerScore === computerScore) {
         endInfo.textContent = 'End of the game! You tied!'
