@@ -21,9 +21,11 @@ const playAgainButton = document.querySelector('.again');
 playAgainButton.addEventListener('click', function() {
     if (!gameActive) {
         const resultInfo = document.querySelector('.result');
+        const roundText = document.querySelector('.roundNumber');
         const choicePlayer = document.querySelector('.choicePlayer');
         const choiceComputer = document.querySelector('.choiceComputer');
         const endInfo = document.querySelector('.end');
+        roundText.textContent = '';
         choicePlayer.textContent = '';
         choiceComputer.textContent = '';
         resultInfo.textContent = '';
@@ -76,51 +78,59 @@ function playRound(playerSelection) {
     const computerSelection = getComputerChoice();
 
     const resultInfo = document.querySelector('.result');
+    const roundText = document.querySelector('.roundNumber');
 
     const choicePlayer = document.querySelector('.choicePlayer');
     const choiceComputer = document.querySelector('.choiceComputer');
-    choicePlayer.innerHTML = '&nbsp;' + capitalizeFirstLetter(playerSelection);
-    choiceComputer.innerHTML = '&nbsp;' + capitalizeFirstLetter(computerSelection);
+    choicePlayer.innerHTML = '&nbsp' + capitalizeFirstLetter(playerSelection);
+    choiceComputer.innerHTML = '&nbsp' + capitalizeFirstLetter(computerSelection);
 
     if (playerSelection === computerSelection) {
-        resultInfo.textContent = 'ROUND: ' + roundNumber + '\n You tied!'
+        roundText.textContent = roundNumber
+        resultInfo.textContent = 'You tied!'
     }
 
     else if (playerSelection === 'rock') {
         if (computerSelection === 'paper') {
             computerScore += 1
-            resultInfo.textContent = 'ROUND: ' + roundNumber + '\n You lose! Paper beats rock.'
+            roundText.textContent = roundNumber
+            resultInfo.textContent = 'You lose! Paper beats rock.'
         }
         else if (computerSelection === 'scissors') {
             playerScore += 1
-            resultInfo.textContent = 'ROUND: ' + roundNumber + '\n You win! Rock beats scissors.'
+            roundText.textContent = roundNumber
+            resultInfo.textContent = 'You win! Rock beats scissors.'
         }
     }
 
     else if (playerSelection === 'paper') {
         if (computerSelection === 'rock') {
             playerScore += 1
-            resultInfo.textContent = 'ROUND: ' + roundNumber + '\n You win! Paper beats rock.'
+            roundText.textContent = roundNumber
+            resultInfo.textContent = 'You win! Paper beats rock.'
         }
         else if (computerSelection === 'scissors') {
             computerScore += 1
-            resultInfo.textContent = 'ROUND: ' + roundNumber + '\n You lose! Scissors beats paper.'
+            roundText.textContent = roundNumber
+            resultInfo.textContent = 'You lose! Scissors beats paper.'
         }
     }
 
     else if (playerSelection === 'scissors') {
         if (computerSelection === 'rock') {
             computerScore += 1
-            resultInfo.textContent = 'ROUND: ' + roundNumber + '\n You lose! Rock beats scissors.'
+            roundText.textContent = roundNumber
+            resultInfo.textContent = 'You lose! Rock beats scissors.'
         }
         else if (computerSelection === 'paper') {
             playerScore += 1
-            resultInfo.textContent = 'ROUND: ' + roundNumber + '\n You win! Scissors beats paper.'
+            roundText.textContent = roundNumber
+            resultInfo.textContent = 'You win! Scissors beats paper.'
         }
     }
 
     const score = document.querySelector('.score');
-    score.textContent = 'C: ' + computerScore + ' P: ' + playerScore;
+    score.innerHTML = '<b>C:&nbsp</b>' + computerScore + '&nbsp<b>P:&nbsp</b>' + playerScore;
 }
 
 function getComputerChoice() {
@@ -167,12 +177,10 @@ function endGame() {
      }
     
     else if (playerScore > computerScore) {
-        endInfo.textContent = 'Final score: Computer: ' + computerScore + ' Player: ' + playerScore 
-        + '\nPlayer wins the game! Thanks for playing.'
+        endInfo.textContent = 'Player wins the game! Thanks for playing.'
     }
     
     else if (computerScore > playerScore) {
-        endInfo.textContent = 'Final score: Computer: ' + computerScore + ' Player: ' + playerScore 
-        + '\nComputer wins the game! Thanks for playing.'
+        endInfo.textContent = 'Computer wins the game! Thanks for playing.'
     }
 }
