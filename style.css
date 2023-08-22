@@ -1,3 +1,67 @@
+@import url('https://fonts.googleapis.com/css2?family=Chakra+Petch&display=swap');
+
+body {
+    font-family: 'Chakra Petch', sans-serif;
+    box-sizing: border-box;
+    margin: 0;
+}
+
+.header {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    font-size: calc(5vw + 1em);
+    padding: 0;
+    margin: 0;
+    flex-grow: 1;
+}
+
+/*Button properties*/
+#rock,
+#paper,
+#scissors {
+    background-color: transparent;
+    outline: none;
+    width: 360px;
+    height: 360px;
+    flex-shrink: 0;
+    border: none;
+    cursor: pointer;
+}
+
+/*Normal Button img size*/
+#rock img,
+#paper img,
+#scissors img {
+    width: 300px;
+}
+
+/*Button img size when hovered over*/
+#rock img:hover,
+#paper img:hover,
+#scissors img:hover {
+    width: 350px;
+    height: 350px;
+}
+
+/*Button img size when a click is held down*/
+#rock img:active,
+#paper img:active,
+#scissors img:active {
+    width: 270px;
+    height: 270px;
+}
+
+/*Div that holds the buttons*/
+.buttons {
+    display: flex;
+    justify-content: space-around;
+    padding: 50px;
+    max-width: 100%;
+    flex-wrap: wrap;
+}
+
 .info {
     border: 2px solid black;
     width: 300px;
