@@ -21,9 +21,11 @@ const playAgainButton = document.querySelector('.again');
 playAgainButton.addEventListener('click', function() {
     if (!gameActive) {
         const resultInfo = document.querySelector('.result');
-        const infoText = document.querySelector('.info');
+        const choicePlayer = document.querySelector('.choicePlayer');
+        const choiceComputer = document.querySelector('.choiceComputer');
         const endInfo = document.querySelector('.end');
-        infoText.textContent = '';
+        choicePlayer.textContent = '';
+        choiceComputer.textContent = '';
         resultInfo.textContent = '';
         endInfo.textContent = '';
         rockButton.removeEventListener('click', handleRockClick);
@@ -75,9 +77,10 @@ function playRound(playerSelection) {
 
     const resultInfo = document.querySelector('.result');
 
-    const infoText = document.querySelector('.info');
-    infoText.textContent = 'You chose: ' + capitalizeFirstLetter(playerSelection) 
-    + ' and Computer chose: ' + capitalizeFirstLetter(computerSelection);
+    const choicePlayer = document.querySelector('.choicePlayer');
+    const choiceComputer = document.querySelector('.choiceComputer');
+    choicePlayer.innerHTML = '&nbsp;' + capitalizeFirstLetter(playerSelection);
+    choiceComputer.innerHTML = '&nbsp;' + capitalizeFirstLetter(computerSelection);
 
     if (playerSelection === computerSelection) {
         resultInfo.textContent = 'ROUND: ' + roundNumber + '\n You tied!'

@@ -62,10 +62,26 @@ body {
     flex-wrap: wrap;
 }
 
-.info {
-    border: 2px solid black;
-    width: 300px;
-    height: 50px
+.choices {
+    display: flex;
+    justify-content: space-around;
+    font-size: calc(2vw + 0.5em);
+}
+
+.choicePlayer,
+.choiceComputer {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    width: 190px;
+    height: 50px;
+}
+
+.choicePlayerBox,
+.choiceComputerBox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .result {
