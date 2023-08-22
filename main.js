@@ -158,7 +158,7 @@ function initializeGame() {
     computerScore = 0;
     roundNumber = 1;
     gameActive = true;
-    //Adds the event listeners again (for when play again is pressed)
+    //Adds the event listeners again (for when play again is pressed )
     rockButton.addEventListener('click', handleRockClick);
     paperButton.addEventListener('click', handlePaperClick);
     scissorsButton.addEventListener('click', handleScissorsClick);
